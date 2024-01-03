@@ -1,4 +1,5 @@
 import functools as ft
+import numpy as np
 import math
 from typing import Callable, Iterable, Optional
 
@@ -37,7 +38,7 @@ def sum_dim_shared_items(a: Profile, b: Profile, base: float):
     return sum_dim_values(min_of_shared_items([a, b]), base)
 
 
-def genre_match(a: Profile, b: Profile, f: Optional[Callable] = None, k: float = 1):
+def profile_match(a: Profile, b: Profile, f: Optional[Callable] = None, k: float = 1):
     if f is None:
         f = sum_dim_shared_items(base=BASE)
     # for sum_dim_shared_items,
@@ -46,11 +47,21 @@ def genre_match(a: Profile, b: Profile, f: Optional[Callable] = None, k: float =
     return logistic_function(f(a, b), k)
 
 
-def score(user: User, movie: Movie, genre_match_kwargs: dict = None):
-    # TODO: add noise
+def noise(mu: float = 0.5, std: float = 0.1, k: float = 1):
+    return logistic_function(np.random.normal(mu, std), k)
+
+
+def score(
+    user: User,
+    movie: Movie,
+    **kwargs: dict,
+):
     # TODO: consider movie rating
     # TODO: consider user type
     # TODO: CI/CD, linting etc.
-    if genre_match_kwargs is None:
-        genre_match_kwargs == {}
-    return genre_match(user.profile, movie.profile, **genre_match_kwargs)
+    return np.mean(
+        [
+            profile_match(user.profile, movie.profile, **kwargs.get("profile_match", {})),
+            noise(**kwargs.get("noise", {})),
+        ]
+    )

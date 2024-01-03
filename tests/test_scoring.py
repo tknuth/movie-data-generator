@@ -1,3 +1,5 @@
+import random
+
 import numpy as np
 
 from movie_data_generator.genre import Genre
@@ -39,5 +41,31 @@ def test_score_genre_fit():
     a = {Genre.WESTERN: 1.0, Genre.SCIFI: 0.8, Genre.ADVENTURE: 1.0}
     b = {Genre.WESTERN: 1.0, Genre.DRAMA: 0.5, Genre.ADVENTURE: 1.0}
     f = sum_dim_shared_items(base=1)
-    assert np.isclose(genre_match(a, b, k=2), 0.967, atol=0.001, rtol=0)
-    assert np.isclose(genre_match(a, b, f, k=2), 0.982, atol=0.001, rtol=0)
+    assert np.isclose(profile_match(a, b, k=2), 0.967, atol=0.001, rtol=0)
+    assert np.isclose(profile_match(a, b, f, k=2), 0.982, atol=0.001, rtol=0)
+
+
+def test_score():
+    user = User(
+        coverage=0.6,
+        profile={Genre.FANTASY: 0.9, Genre.ANIMATION: 0.4},
+    )
+
+    movie = Movie(
+        title="a",
+        year=2010,
+        popularity=0.9,
+        rating=0.4,
+        profile={Genre.FANTASY: 0.5, Genre.ADVENTURE: 0.5},
+    )
+
+    a = score(user, movie)
+    b = score(user, movie)
+    c = score(user, movie)
+
+    assert 0 < a < 1
+    assert 0 < b < 1
+    assert 0 < c < 1
+
+    assert not np.isclose(a, b, atol=0.001, rtol=0)
+    assert not np.isclose(b, c, atol=0.001, rtol=0)
