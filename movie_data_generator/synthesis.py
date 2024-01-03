@@ -41,8 +41,8 @@ def rate_movies(user: User, movies: list[Movie]):
     return [create_rating(user, movie) for movie in movies]
 
 
-def sample_and_rate_movies(user: User, movies: list[Movie]):
-    return rate_movies(user, sample_movies(user, movies))
+# def sample_and_rate_movies(user: User, movies: list[Movie]):
+#     return rate_movies(user, sample_movies(user, movies))
 
 
 def create_random_user(profiles):
