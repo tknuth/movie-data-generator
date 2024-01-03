@@ -51,6 +51,10 @@ def noise(mu: float = 0, std: float = 0.1):
     return np.random.normal(mu, std)
 
 
+def clamp(x, lower=0, upper=1):
+    return max(lower, min(x, upper))
+
+
 def score(
     user: User,
     movie: Movie,
@@ -61,4 +65,4 @@ def score(
     # TODO: CI/CD, linting etc.
     p = profile_match(user.profile, movie.profile, **kwargs.get("profile_match", {}))
     e = noise(**kwargs.get("noise", {}))
-    return p + e
+    return clamp(p + e)

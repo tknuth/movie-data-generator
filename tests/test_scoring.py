@@ -45,6 +45,12 @@ def test_score_genre_fit():
     assert np.isclose(profile_match(a, b, f, k=2), 0.982, atol=0.001, rtol=0)
 
 
+def test_clamp():
+    assert clamp(+0.5) == 0.5
+    assert clamp(+1.3) == 1.0
+    assert clamp(-0.9) == 0.0
+
+
 def test_score():
     user = User(
         coverage=0.6,
