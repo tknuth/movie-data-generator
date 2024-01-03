@@ -47,8 +47,8 @@ def profile_match(a: Profile, b: Profile, f: Optional[Callable] = None, k: float
     return logistic_function(f(a, b), k)
 
 
-def noise(mu: float = 0.5, std: float = 0.1, k: float = 1):
-    return logistic_function(np.random.normal(mu, std), k)
+def noise(mu: float = 0, std: float = 0.1):
+    return np.random.normal(mu, std)
 
 
 def score(
@@ -59,9 +59,6 @@ def score(
     # TODO: consider movie rating
     # TODO: consider user type
     # TODO: CI/CD, linting etc.
-    return np.mean(
-        [
-            profile_match(user.profile, movie.profile, **kwargs.get("profile_match", {})),
-            noise(**kwargs.get("noise", {})),
-        ]
-    )
+    p = profile_match(user.profile, movie.profile, **kwargs.get("profile_match", {}))
+    e = noise(**kwargs.get("noise", {}))
+    return p + e
