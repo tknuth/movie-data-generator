@@ -54,7 +54,10 @@ def test_clamp():
 def test_score():
     user = User(
         coverage=0.6,
-        profile={Genre.FANTASY: 0.9, Genre.ANIMATION: 0.4},
+        profile={
+            Genre.FANTASY: 0.9,
+            Genre.ANIMATION: 0.4,
+        },
     )
 
     movie = Movie(
@@ -62,7 +65,10 @@ def test_score():
         year=2010,
         popularity=0.9,
         rating=0.4,
-        profile={Genre.FANTASY: 0.5, Genre.ADVENTURE: 0.5},
+        profile={
+            Genre.FANTASY: 0.5,
+            Genre.ADVENTURE: 0.5,
+        },
     )
 
     a = score(user, movie)
