@@ -6,7 +6,11 @@ requires = [
     "numpy",
 ]
 
-dev_requires = ["pytest", "pytest-sugar"]
+dev_requires = [
+    "pytest",
+    "pytest-sugar",
+    "pre-commit",
+]
 
 setup(
     name="movie-data-generator",
