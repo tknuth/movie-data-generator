@@ -1,15 +1,21 @@
 import random
 import statistics
 from dataclasses import dataclass
-from movie_data_generator.user import User
+
 from movie_data_generator.movie import Movie
+from movie_data_generator.user import User
 
 
-# TODO: sample with popularity
 def sample_movies(user: User, l: list[Movie]):
     s = [movie for movie in l[:] if set(movie.profile) & set(user.profile)]
-    random.shuffle(s)
-    return s[: round(len(s) * user.coverage)]
+    w = [s.popularity for s in s]
+    n = round(len(s) * user.coverage)
+    c = set()
+    while len(c) < n and len(set(s)) >= n:
+        c.add(random.choices(s, w)[0])
+    c = list(c)
+    random.shuffle(c)
+    return c
 
 
 # assumes that additional genres are irrelevant

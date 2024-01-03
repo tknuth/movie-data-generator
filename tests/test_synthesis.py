@@ -1,29 +1,53 @@
-# import random
+import random
 
-# from movie_data_generator.movie import load_movies
-# from movie_data_generator.profile import load_profiles
-# from movie_data_generator.synthesis import sample, similarity, create_random_user
-
-
-# def test_sample():
-#     random.seed(1)
-#     l = [1, 2, 3, 4, 5]
-#     assert sample(l, 0.5) == [3, 4]
-#     assert sample(l, 0.6) == [1, 3, 2]
-#     assert l == [1, 2, 3, 4, 5]
+from movie_data_generator.movie import *
+from movie_data_generator.profile import *
+from movie_data_generator.genre import *
+from movie_data_generator.synthesis import *
 
 
-# def test_create_random_user():
-#     random.seed(1)
+def test_sample():
+    users = [
+        User(
+            coverage=0.6,
+            profile={Genre.FANTASY: 0.9, Genre.ANIMATION: 0.4},
+        ),
+        User(
+            coverage=0.8,
+            profile={Genre.FANTASY: 0.9, Genre.ANIMATION: 0.4},
+        ),
+    ]
 
-#     profiles = load_profiles()
-#     movies = load_movies()
+    movies = [
+        Movie(
+            title="a",
+            year=2010,
+            popularity=0.9,
+            rating=0.4,
+            profile={Genre.FANTASY: 0.5, Genre.ADVENTURE: 0.5},
+        ),
+        Movie(
+            title="b",
+            year=2010,
+            popularity=0.6,
+            rating=0.4,
+            profile={Genre.ACTION: 0.9, Genre.ADVENTURE: 0.5},
+        ),
+        Movie(
+            title="c",
+            year=2010,
+            popularity=0.6,
+            rating=0.4,
+            profile={Genre.COMEDY: 0.5, Genre.ANIMATION: 0.8},
+        ),
+    ]
 
-#     a = create_random_user(profiles)
-#     b = create_random_user(profiles)
+    random.seed(1)
+    assert sample_movies(users[0], movies) == [movies[0]]
+    assert sample_movies(users[1], movies) == [movies[0], movies[2]]
 
-#     print()
-#     print(a.profile, movies[0].profile)
-#     print()
-#     print(movies[0].slug)
-#     print(similarity(a.profile, movies[0].profile))
+
+def test_create_random_user():
+    random.seed(1)
+    profiles = load_profiles()
+    create_random_user(profiles)

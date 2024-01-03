@@ -1,6 +1,5 @@
 from .genre import Genre
 
-
 Profile = dict[Genre, float]
 
 PROFILES = [
