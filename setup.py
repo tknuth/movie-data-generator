@@ -10,6 +10,8 @@ dev_requires = [
     "pytest",
     "pytest-sugar",
     "pre-commit",
+    "black",
+    "flake8",
 ]
 
 setup(
