@@ -1,6 +1,10 @@
 from setuptools import setup, find_packages
 
-requires = ["toolz"]
+requires = [
+    "toolz",
+    "uuid",
+    "numpy",
+]
 
 dev_requires = ["pytest", "pytest-sugar"]
 
