@@ -5,7 +5,7 @@ from movie_data_generator.user import User
 from movie_data_generator.movie import Movie
 
 
-# mostly for sampling movies
+# TODO: sample with popularity
 def sample_movies(user: User, l: list[Movie]):
     s = [movie for movie in l[:] if set(movie.profile) & set(user.profile)]
     random.shuffle(s)
@@ -27,12 +27,6 @@ class Rating:
     score: float
 
 
-# TODO: add noise
-# TODO: max per overlapping interest
-# TODO: relevance score
-# TODO: modifiers: relevance by profile match, movie rating, user type
-# TODO: use logistic function with steepness modifier k
-# TODO: sample with popularity
 # TODO: CI/CD, linting etc.
 
 

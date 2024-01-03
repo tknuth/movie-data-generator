@@ -1,6 +1,8 @@
 from .genre import Genre
 
 
+Profile = dict[Genre, float]
+
 PROFILES = [
     {Genre.ADVENTURE: 0.6, Genre.ACTION: 0.4},
     {Genre.THRILLER: 0.5, Genre.DRAMA: 0.5},  # crime, mystery
