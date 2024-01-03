@@ -1,12 +1,12 @@
-import toolz.curried as tz
-from .genre import Genre
-from .movie import Movie
-from .user import User
-from .profile import Profile
 import functools as ft
 import math
-from typing import Iterable, Callable, Optional
+from typing import Callable, Iterable, Optional
 
+import toolz.curried as tz
+
+from .movie import Movie
+from .profile import Profile
+from .user import User
 
 BASE = 0.7
 
