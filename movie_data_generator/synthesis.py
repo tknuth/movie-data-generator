@@ -6,6 +6,7 @@ from movie_data_generator.movie import Movie
 from movie_data_generator.user import User
 
 
+# TODO: fix bug when popularity is zero, endless loop?
 def sample_movies(user: User, l: list[Movie]):
     s = [movie for movie in l[:] if set(movie.profile) & set(user.profile)]
     w = [s.popularity for s in s]
