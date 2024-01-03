@@ -33,9 +33,6 @@ class Rating:
     score: float
 
 
-# TODO: CI/CD, linting etc.
-
-
 def create_rating(user: User, movie: Movie):
     return Rating(movie, user, similarity(user.profile, movie.profile))
 

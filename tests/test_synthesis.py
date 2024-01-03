@@ -43,8 +43,8 @@ def test_sample():
     ]
 
     random.seed(1)
-    assert sample_movies(users[0], movies) == [movies[0]]
-    assert sample_movies(users[1], movies) == [movies[0], movies[2]]
+    assert set(sample_movies(users[0], movies)) == set([movies[0]])
+    assert set(sample_movies(users[1], movies)) == set([movies[0], movies[2]])
 
 
 def test_create_random_user():

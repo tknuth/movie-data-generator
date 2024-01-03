@@ -50,6 +50,7 @@ def score(user: User, movie: Movie, genre_match_kwargs: dict = None):
     # TODO: add noise
     # TODO: consider movie rating
     # TODO: consider user type
+    # TODO: CI/CD, linting etc.
     if genre_match_kwargs is None:
         genre_match_kwargs == {}
     return genre_match(user.profile, movie.profile, **genre_match_kwargs)
