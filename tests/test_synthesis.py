@@ -1,8 +1,8 @@
 import random
 
+from movie_data_generator.genre import *
 from movie_data_generator.movie import *
 from movie_data_generator.profile import *
-from movie_data_generator.genre import *
 from movie_data_generator.synthesis import *
 
 
