@@ -4,6 +4,7 @@ requires = [
     "toolz",
     "uuid",
     "numpy",
+    "loguru",
 ]
 
 dev_requires = [
