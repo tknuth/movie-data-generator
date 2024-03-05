@@ -1,7 +1,8 @@
-from .genre import Genre
 from dataclasses import dataclass, field
-from toolz.curried import pipe, map, filter
-from uuid import uuid4
+
+from toolz.curried import filter, map, pipe
+
+from .genre import Genre
 
 
 @dataclass(frozen=True)
