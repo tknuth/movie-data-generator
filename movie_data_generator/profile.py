@@ -5,12 +5,12 @@ Profile = dict[Genre, float]
 
 def load_profiles():
     return (
-        {Genre.ADVENTURE: 6, Genre.ACTION: 4},
-        {Genre.THRILLER: 5, Genre.DRAMA: 5},  # crime, mystery
-        {Genre.FANTASY: 5, Genre.ADVENTURE: 3, Genre.ANIMATION: 3},
-        {Genre.DOCUMENTARY: 7, Genre.HISTORY: 3},  # realist
-        {Genre.ROMANCE: 6, Genre.DRAMA: 2, Genre.COMEDY: 2},  # romcom/dramedy
-        {Genre.WESTERN: 6, Genre.ACTION: 2, Genre.ADVENTURE: 2},
+        {Genre.ADVENTURE: 0.6, Genre.ACTION: 0.4},
+        {Genre.THRILLER: 0.5, Genre.DRAMA: 0.5},  # crime, mystery
+        {Genre.FANTASY: 0.5, Genre.ADVENTURE: 0.3, Genre.ANIMATION: 0.3},
+        {Genre.DOCUMENTARY: 0.7, Genre.HISTORY: 0.3},  # realist
+        {Genre.ROMANCE: 0.6, Genre.DRAMA: 0.2, Genre.COMEDY: 0.2},  # romcom/dramedy
+        {Genre.WESTERN: 0.6, Genre.ACTION: 0.2, Genre.ADVENTURE: 0.2},
     )
 
 

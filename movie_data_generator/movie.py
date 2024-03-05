@@ -18,12 +18,23 @@ class Movie:
 
     @property
     def slug(self):
-        return pipe(
+        title = pipe(
             self.title.lower(),
             filter(lambda c: c.isalnum() or c.isspace()),
             map(lambda c: c.replace(" ", "-")),
             lambda l: "".join(l),
         )
+        return "-".join([title, str(self.year)])
+
+    def to_dict(self):
+        return {
+            "slug": self.slug,
+            "title": self.title,
+            "year": self.year,
+            "rating": self.rating,
+            "popularity": self.popularity,
+            "profile": {k.value: v for k, v in self.profile.items()},
+        }
 
     def __repr__(self):
         return f"Movie(slug={self.slug})"
@@ -33,7 +44,7 @@ def load_movies():
     movies = (
         Movie(
             title="The Philosopher's Play",
-            year=2010,
+            year=1998,
             popularity=0.6,
             rating=0.4,
             profile={
@@ -43,7 +54,7 @@ def load_movies():
         ),
         Movie(
             title="Echoes of the Past",
-            year=2015,
+            year=2005,
             popularity=0.4,
             rating=0.9,
             profile={
@@ -54,7 +65,7 @@ def load_movies():
         ),
         Movie(
             title="The Great Cosmic Race",
-            year=2022,
+            year=2020,
             rating=0.7,
             popularity=0.4,
             profile={
