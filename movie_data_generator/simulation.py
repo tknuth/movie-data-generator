@@ -10,9 +10,9 @@ from .environment import Environment
 
 @dataclass(frozen=True)
 class Config:
-    signup_probability: float = 0.1
+    signup_probability: float = 0.3
     step_size: Callable = lambda: timedelta(days=random.randint(4, 14))
-    watch_probability: Callable = lambda: random.uniform(0, 1)
+    watch_probability: Callable = lambda: random.uniform(0.5, 1)
 
 
 @dataclass

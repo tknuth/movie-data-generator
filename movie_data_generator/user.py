@@ -21,11 +21,11 @@ class User:
     signup_date: datetime
     watch_probability: float = field(repr=False)
     profile: dict[Genre, float] = field(repr=False)
-    history: dict[str, Rating] = field(default_factory=dict)
+    ratings: dict[str, Rating] = field(default_factory=dict)
     id: str = field(default_factory=lambda: str(uuid4()))
 
     def __post_init__(self):
-        self.watch_probability = round(self.watch_probability, 2)
+        self.watch_probability = round(self.watch_probability, 1)
         self.profile = normalize(self.profile)
 
     def make_turn(self, env: Environment):
@@ -37,11 +37,11 @@ class User:
         if not movie:
             return
         rating = self.rate_movie(movie)
-        self.history[movie.slug] = rating
+        self.ratings[movie] = rating
         logger.info(f"{env.date}: User rated '{movie.title}' with {rating.score}.")
 
     def has_watched_before(self, movie: Movie) -> bool:
-        return movie.slug in self.history
+        return movie.slug in self.ratings
 
     def shared_genres(self, movie: Movie) -> set[Genre]:
         return intersecting_keys([self.profile, movie.profile])
@@ -55,7 +55,7 @@ class User:
             return random.choice(candidates)
 
     def rate_movie(self, movie: Movie) -> Rating:
-        score = round(clamp(movie.rating + noise()), 2)
+        score = round(clamp(movie.rating + noise()), 1)
         return Rating(user=self, movie=movie, score=score)
 
 
